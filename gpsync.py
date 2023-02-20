@@ -61,12 +61,13 @@ def del_dest(dump_dest,dump_src):
     for o in dels:
         print(o)
         if (obj:=re.findall(r'^CREATE TABLE (\S+)', o)):
-            # print(obj)
             sql=f'drop table {obj[0]};'
             print(sql)
         if (obj:=re.findall(r'^CREATE FUNCTION (.*?\))', o)):
-            # print(obj)
             sql=f'drop function {obj[0]};'
+            print(sql)
+        if (obj:=re.findall(r'^CREATE INDEX (\S+)', o)):
+            sql=f'drop index {obj[0]};'
             print(sql)
     return dels
 
